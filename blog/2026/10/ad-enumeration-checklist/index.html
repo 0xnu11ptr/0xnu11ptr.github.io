@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#050505">
+  
+  
+  <title>My Active Directory Enumeration Checklist | 0xnu11ptr</title>
+  <meta name="description" content="Penetration Tester · OSCP+ · HTB CPTS — profile and blog of 0xnu11ptr.">
+  <meta name="author" content="Mekahal Chamese Elddine">
+  <link rel="canonical" href="https://0xnu11ptr.github.io/blog/2026/10/ad-enumeration-checklist/">
+  <meta property="og:title" content="My Active Directory Enumeration Checklist | 0xnu11ptr">
+  <meta property="og:description" content="Penetration Tester · OSCP+ · HTB CPTS — profile and blog of 0xnu11ptr.">
+  <meta property="og:url" content="https://0xnu11ptr.github.io/blog/2026/10/ad-enumeration-checklist/">
+  <meta property="og:site_name" content="0xnu11ptr">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <link rel="alternate" type="application/atom+xml" title="0xnu11ptr" href="/feed.xml">
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css?v=1792956135">
+</head>
+<body>
+  <canvas id="rain" aria-hidden="true"></canvas>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="torch" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a class="brand" href="/">
+      <img src="/assets/img/favicon.svg" alt="" width="30" height="30">
+      <span>0xnu11ptr</span>
+    </a>
+    <nav>
+      <a href="/#file">Dossier</a>
+      <a href="/#method">Method</a>
+      <a href="/#evidence">Evidence</a>
+      <a href="/#gadgets">Gadgets</a>
+      <a href="/blog/">Case Files</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+    <div class="status" title="Local time in Laghouat"><i></i><span id="clock">--:--</span></div>
+  </header>
+
+  <main>
+    
+<article class="post wrap">
+  <a class="back" href="/blog/">← Back to all case files</a>
+  <header class="post-head">
+    <div class="post-type f-report">
+      Field Report
+      <span>· File 261022</span>
+    </div>
+    <h1>My Active Directory Enumeration Checklist</h1>
+    <p class="post-meta">
+      <time datetime="2026-10-22T00:00:00.000Z">October 22, 2026</time>
+      · 2 min read
+      · <span class="tag">#active-directory</span><span class="tag">#enumeration</span><span class="tag">#notes</span>
+    </p>
+  </header>
+  <div class="prose">
+    <p>Most Active Directory compromises are not about a fancy exploit. They are about one small mistake that enumeration shows you. This is the checklist I follow at the start of every internal test or lab, once I have a first set of domain credentials.</p>
+<blockquote>
+<p>Use these techniques only on systems you are allowed to test.</p>
+</blockquote>
+<h2>1. Know the domain</h2>
+<pre class="language-bash"><code class="language-bash"><span class="token comment"># Domain controllers, domain name, SMB signing</span>
+nxc smb <span class="token number">10.10</span>.10.0/24
+
+<span class="token comment"># Password policy before any spraying</span>
+nxc smb DC01 <span class="token parameter variable">-u</span> user <span class="token parameter variable">-p</span> <span class="token string">'Password'</span> --pass-pol</code></pre>
+<p>Check the lockout threshold <strong>before</strong> you try any password. Locking out half of the company is a bad first day.</p>
+<h2>2. Users, groups and descriptions</h2>
+<pre class="language-bash"><code class="language-bash">nxc ldap DC01 <span class="token parameter variable">-u</span> user <span class="token parameter variable">-p</span> <span class="token string">'Password'</span> <span class="token parameter variable">--users</span>
+nxc ldap DC01 <span class="token parameter variable">-u</span> user <span class="token parameter variable">-p</span> <span class="token string">'Password'</span> <span class="token parameter variable">--groups</span></code></pre>
+<p>Read the user descriptions. Admins still put passwords there.</p>
+<h2>3. Collect for BloodHound</h2>
+<pre class="language-bash"><code class="language-bash">bloodhound-python <span class="token parameter variable">-d</span> corp.local <span class="token parameter variable">-u</span> user <span class="token parameter variable">-p</span> <span class="token string">'Password'</span> <span class="token parameter variable">-ns</span> <span class="token number">10.10</span>.10.10 <span class="token parameter variable">-c</span> All</code></pre>
+<p>In BloodHound, start with <em>Shortest Paths to Domain Admins</em> from your owned user, then look at outbound object control: <code>GenericAll</code>, <code>GenericWrite</code>, <code>WriteDacl</code>, <code>ForceChangePassword</code>.</p>
+<h2>4. Roastable accounts</h2>
+<pre class="language-bash"><code class="language-bash"><span class="token comment"># Kerberoasting</span>
+GetUserSPNs.py corp.local/user:<span class="token string">'Password'</span> -dc-ip <span class="token number">10.10</span>.10.10 <span class="token parameter variable">-request</span>
+
+<span class="token comment"># AS-REP roasting</span>
+GetNPUsers.py corp.local/ <span class="token parameter variable">-usersfile</span> users.txt -dc-ip <span class="token number">10.10</span>.10.10 -no-pass</code></pre>
+<h2>5. Shares and files</h2>
+<pre class="language-bash"><code class="language-bash">nxc smb <span class="token number">10.10</span>.10.0/24 <span class="token parameter variable">-u</span> user <span class="token parameter variable">-p</span> <span class="token string">'Password'</span> <span class="token parameter variable">--shares</span></code></pre>
+<p>Look for scripts, <code>web.config</code>, <code>unattend.xml</code> and backup files. Developers leave connection strings everywhere — I know, because I am one.</p>
+<h2>6. ADCS</h2>
+<pre class="language-bash"><code class="language-bash">certipy <span class="token function">find</span> <span class="token parameter variable">-u</span> user@corp.local <span class="token parameter variable">-p</span> <span class="token string">'Password'</span> -dc-ip <span class="token number">10.10</span>.10.10 <span class="token parameter variable">-vulnerable</span></code></pre>
+<p>Misconfigured certificate templates are one of the fastest paths to Domain Admin today.</p>
+<h2>Remediation, always</h2>
+<ul>
+<li>Use long random passwords (or gMSA) for service accounts to stop Kerberoasting.</li>
+<li>Enable Kerberos pre-authentication on every account.</li>
+<li>Remove passwords from descriptions, shares and scripts.</li>
+<li>Review ACLs on sensitive groups and audit ADCS templates.</li>
+<li>Enforce SMB signing on all hosts.</li>
+</ul>
+<p>Every finding in a report should come with a fix like these. That is what makes a test useful.</p>
+
+  </div>
+  <div class="post-end"><span class="stamp small-stamp">End of file</span></div>
+</article>
+
+  </main>
+
+  <footer class="footer">
+    <p class="footer-truth">One truth prevails.</p>
+    <p>© 2026 Mekahal Chamese Elddine · <span class="mono">0xnu11ptr</span></p>
+  </footer>
+
+  <script src="/assets/js/main.js?v=1792956135" defer></script>
+</body>
+</html>

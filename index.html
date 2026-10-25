@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#050505">
+  
+  
+  <title>0xnu11ptr — Penetration Tester | 0xnu11ptr</title>
+  <meta name="description" content="Penetration Tester · OSCP+ · HTB CPTS — profile and blog of 0xnu11ptr.">
+  <meta name="author" content="Mekahal Chamese Elddine">
+  <link rel="canonical" href="https://0xnu11ptr.github.io/">
+  <meta property="og:title" content="0xnu11ptr — Penetration Tester | 0xnu11ptr">
+  <meta property="og:description" content="Penetration Tester · OSCP+ · HTB CPTS — profile and blog of 0xnu11ptr.">
+  <meta property="og:url" content="https://0xnu11ptr.github.io/">
+  <meta property="og:site_name" content="0xnu11ptr">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <link rel="alternate" type="application/atom+xml" title="0xnu11ptr" href="/feed.xml">
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css?v=1792956135">
+</head>
+<body>
+  <canvas id="rain" aria-hidden="true"></canvas>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="torch" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a class="brand" href="/">
+      <img src="/assets/img/favicon.svg" alt="" width="30" height="30">
+      <span>0xnu11ptr</span>
+    </a>
+    <nav>
+      <a href="/#file">Dossier</a>
+      <a href="/#method">Method</a>
+      <a href="/#evidence">Evidence</a>
+      <a href="/#gadgets">Gadgets</a>
+      <a href="/blog/">Case Files</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+    <div class="status" title="Local time in Laghouat"><i></i><span id="clock">--:--</span></div>
+  </header>
+
+  <main>
+    <section class="hero" id="top">
+  <div class="clues" aria-hidden="true">
+    <span style="left:6%;top:14%">SeImpersonatePrivilege</span>
+    <span style="left:30%;top:8%">$krb5tgs$23$*svc_sql*</span>
+    <span style="left:58%;top:16%">GenericAll → Domain Admins</span>
+    <span style="left:12%;top:38%">' OR 1=1 --</span>
+    <span style="left:44%;top:30%">id=1337 → id=1338</span>
+    <span style="left:4%;top:62%">nxc smb DC01 --shares</span>
+    <span style="left:36%;top:70%">web.config: Password=</span>
+    <span style="left:68%;top:60%">ESC1 template</span>
+    <span style="left:22%;top:86%">Access-Control-Allow-Origin: *</span>
+    <span style="left:76%;top:84%">DCSync</span>
+    <span style="left:84%;top:34%">NTLM relay</span>
+    <span style="left:52%;top:50%">../../../../etc/passwd</span>
+  </div>
+  <div class="lens" aria-hidden="true"></div>
+
+  <div class="hero-inner wrap">
+    <div class="hero-text">
+      <p class="kicker"><span class="dot"></span> Case No. 4869 · Laghouat, Algeria · Remote</p>
+      <p class="codename">Codename <b>0xnu11ptr</b></p>
+      <h1 class="hero-title">Mekahal <span>Chamese Elddine</span></h1>
+      <p class="hero-role">Penetration Tester <i></i> OSCP+ <i></i> HTB CPTS</p>
+      <p class="truth">One truth prevails.</p>
+      <p class="hero-lead">
+        Every breach starts with a small clue. I find it before the real attacker does:
+        internal and external network tests, Active Directory compromise and web application
+        assessments, from someone who also builds the software he tests.
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-red" href="#contact">Open a case</a>
+        <a class="btn btn-ghost" href="/blog/">Read the case files</a>
+      </div>
+      <ul class="hero-stats">
+        <li><b>OSCP+</b><span>OffSec · 2026</span></li>
+        <li><b>CPTS</b><span>Hack The Box · 2026</span></li>
+        <li><b>2 yrs</b><span>Full-stack developer</span></li>
+      </ul>
+      <p class="hint">Move the magnifying glass over the page to find the clues.</p>
+    </div>
+
+    <div class="hero-file-wrap">
+      <article class="dossier tilt" aria-label="Case file: 0xnu11ptr">
+        <div class="dossier-tab">Case file</div>
+        <span class="clip" aria-hidden="true"></span>
+        <span class="tag-evidence" aria-hidden="true">Evidence<br><b>#4869</b></span>
+        <div class="dossier-photo">
+          <svg viewBox="0 0 200 240" role="img" aria-label="Silhouette of a figure in a black hat and coat under a red moon">
+            <defs>
+              <radialGradient id="moon" cx="50%" cy="50%" r="50%">
+                <stop offset="0" stop-color="#ff3b3b"/>
+                <stop offset=".55" stop-color="#9b0f16"/>
+                <stop offset="1" stop-color="#2a0306" stop-opacity="0"/>
+              </radialGradient>
+              <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#140507"/>
+                <stop offset="1" stop-color="#030303"/>
+              </linearGradient>
+              <linearGradient id="rim" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#3a3a3f"/>
+                <stop offset=".5" stop-color="#0a0a0b"/>
+                <stop offset="1" stop-color="#2b2b30"/>
+              </linearGradient>
+            </defs>
+            <rect width="200" height="240" fill="url(#sky)"/>
+            <circle cx="132" cy="70" r="58" fill="url(#moon)" opacity=".9"/>
+            <circle cx="132" cy="70" r="30" fill="#c2141e" opacity=".55"/>
+            <g stroke="#6b6b72" stroke-width=".6" opacity=".35">
+              <path d="M14 0 l-8 40 M40 10 l-8 40 M70 0 l-8 40 M180 20 l-8 40 M160 120 l-8 40 M24 150 l-8 40 M190 170 l-8 40 M60 190 l-8 40"/>
+            </g>
+            <path fill="#070707" d="M0 200 V160 h18 v-22 h14 v30 h12 v-40 h20 v52 h10 v-20 h16 v30 h12 V140 h22 v40 h14 v-26 h18 v34 h14 v-18 h10 V240 H0Z"/>
+            <g>
+              <path d="M48 240 C52 196 62 166 78 152 L92 146 L100 170 L108 146 L122 152 C138 166 148 196 152 240Z" fill="url(#rim)"/>
+              <path d="M92 146 L100 170 L84 200 L72 158Z" fill="#1c1c20"/>
+              <path d="M108 146 L100 170 L116 200 L128 158Z" fill="#1c1c20"/>
+              <path d="M100 170 L95 240 M100 170 L105 240" stroke="#000" stroke-width="1.2"/>
+              <path d="M86 132 Q86 150 100 154 Q114 150 114 132 L114 116 Q100 108 86 116Z" fill="#0b0b0c"/>
+              <path d="M84 118 C82 136 80 150 76 160 L86 150 C88 140 88 128 88 120Z" fill="#c9ccd1" opacity=".85"/>
+              <path d="M116 118 C118 136 120 150 124 160 L114 150 C112 140 112 128 112 120Z" fill="#c9ccd1" opacity=".85"/>
+              <ellipse cx="100" cy="114" rx="40" ry="7" fill="#0d0d0e" stroke="#2c2c31" stroke-width="1"/>
+              <path d="M80 113 C80 96 84 84 100 84 C116 84 120 96 120 113Z" fill="#0b0b0c" stroke="#2c2c31" stroke-width="1"/>
+              <path d="M80 106 H120 V112 H80Z" fill="#1f1f23"/>
+              <path d="M108 140 l18 4" stroke="#dcdcdc" stroke-width="2.2" stroke-linecap="round"/>
+              <circle class="ember" cx="127" cy="144.3" r="2.2" fill="#ff4d2e"/>
+              <path class="smoke" d="M128 140 C124 130 134 124 128 114 C124 106 132 100 128 92" stroke="#9a9aa2" stroke-width="1" fill="none" opacity=".45"/>
+            </g>
+          </svg>
+          <span class="photo-label">Subject · last seen at night</span>
+        </div>
+        <dl class="dossier-fields">
+          <div><dt>Codename</dt><dd class="mono">0xnu11ptr</dd></div>
+          <div><dt>Name</dt><dd>Mekahal Chamese Elddine</dd></div>
+          <div><dt>Role</dt><dd>Penetration Tester</dd></div>
+          <div><dt>Clearance</dt><dd>OSCP+ · CPTS</dd></div>
+          <div><dt>Status</dt><dd class="active">● Active</dd></div>
+        </dl>
+        <p class="dossier-note">
+          Finds the smallest gap, follows the trail to the Domain Controller,
+          then writes a clear report with fix steps for developers and management.
+        </p>
+        <span class="stamp">Top Secret</span>
+        <div class="dossier-code mono">4869-NULL-0000 · Eyes only</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>Active Directory</span><span>Web Applications</span><span>Source Code Review</span><span>Privilege Escalation</span><span>Pivoting</span><span>Bug Bounty</span><span>Reporting</span>
+    <span>Active Directory</span><span>Web Applications</span><span>Source Code Review</span><span>Privilege Escalation</span><span>Pivoting</span><span>Bug Bounty</span><span>Reporting</span>
+  </div>
+</div>
+
+<section class="section wrap" id="file">
+  <div class="section-head" data-num="01">
+    <span class="eyebrow">Case 01 · The Dossier</span>
+    <h2>The developer who learned to think like the attacker</h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-copy">
+      <p class="lead-in">
+        I am a penetration tester with <b>OSCP+</b> and <b>HTB CPTS</b>, and a background as a full-stack developer
+        in C#/ASP.NET Core and React/TypeScript.
+      </p>
+      <p>
+        I focus on internal and external network tests, Active Directory compromise and web application
+        assessments. Writing production code every day gives me an edge in <b>source code review</b> and in finding
+        <b>business logic flaws</b> that scanners miss. I know how real teams ship software, so my findings come
+        with practical fixes, not just a list of CVEs.
+      </p>
+      <p>
+        On the bug bounty side I report through public programs, using recon, manual code review and
+        logic testing on large enterprise attack surfaces.
+        <span class="redact" tabindex="0" title="Hover to declassify">Every target stays confidential.</span>
+      </p>
+    </div>
+    <ul class="traits">
+      <li><span class="num">01</span><div><b>Offense</b><p>AD attacks, lateral movement, pivoting, privilege escalation.</p></div></li>
+      <li><span class="num">02</span><div><b>Web</b><p>Injection, IDOR, auth bypass, file upload, XXE, business logic.</p></div></li>
+      <li><span class="num">03</span><div><b>Code review</b><p>C#, .NET and TypeScript codebases, read like a developer.</p></div></li>
+      <li><span class="num">04</span><div><b>Reporting</b><p>Clear findings, risk and remediation for devs and managers.</p></div></li>
+    </ul>
+  </div>
+</section>
+
+<section class="section wrap" id="method">
+  <div class="section-head" data-num="02">
+    <span class="eyebrow">Case 02 · The Method</span>
+    <h2>Every compromise is a mystery with only one truth</h2>
+    <p class="muted">The same deduction on every engagement: follow the clues, connect them, name the culprit, close the case.</p>
+  </div>
+  <div class="board" id="board">
+    <svg class="strings" aria-hidden="true"></svg>
+    <article class="note" style="--r:-3deg"><span class="pin"></span><em>Clue 1</em><h3>Recon</h3><p>Ports, services, users, leaked files. Nothing is too small.</p></article>
+    <article class="note" style="--r:2deg"><span class="pin"></span><em>Clue 2</em><h3>Foothold</h3><p>One weak password, one bad upload, one injection is enough.</p></article>
+    <article class="note" style="--r:-1.5deg"><span class="pin"></span><em>Clue 3</em><h3>Escalation</h3><p>From a low user to SYSTEM or root on the first host.</p></article>
+    <article class="note" style="--r:2.5deg"><span class="pin"></span><em>Clue 4</em><h3>Lateral Movement</h3><p>Pivot through the network and follow the trust between hosts.</p></article>
+    <article class="note" style="--r:-2deg"><span class="pin"></span><em>Clue 5</em><h3>Domain Admin</h3><p>The culprit is named: the exact path to full control.</p></article>
+    <article class="note closed" style="--r:1.5deg"><span class="pin"></span><em>Verdict</em><h3>Report</h3><p>Every step proven, every finding with a fix.</p><span class="stamp">Case closed</span></article>
+  </div>
+</section>
+
+<section class="section wrap" id="evidence">
+  <div class="section-head" data-num="03">
+    <span class="eyebrow">Case 03 · Evidence</span>
+    <h2>Certifications on file</h2>
+  </div>
+  <div class="card-row">
+    <article class="badge-card tilt">
+      <div class="bc-top"><span class="bc-level">Exhibit A</span><span class="seal">Verified</span></div>
+      <div class="bc-mark">OSCP<sup>+</sup></div>
+      <h3>OffSec Certified Professional+</h3>
+      <p>Hands-on exploitation of networks and Active Directory under exam pressure.</p>
+      <div class="bc-foot"><span>OffSec</span><span>Sep 2026</span></div>
+    </article>
+    <article class="badge-card tilt">
+      <div class="bc-top"><span class="bc-level">Exhibit B</span><span class="seal">Verified</span></div>
+      <div class="bc-mark">CPTS</div>
+      <h3>Certified Penetration Testing Specialist</h3>
+      <p>Full engagement: enumeration, exploitation, AD and a commercial-grade report.</p>
+      <div class="bc-foot"><span>Hack The Box</span><span>Jul 2026</span></div>
+    </article>
+    <article class="badge-card dim tilt">
+      <div class="bc-top"><span class="bc-level">Exhibit C</span><span class="seal grey">Coursework</span></div>
+      <div class="bc-mark">CCNA</div>
+      <h3>Cisco Networking Academy</h3>
+      <p>ITN, SRWE and ENSA modules. The routing and switching base under every pivot.</p>
+      <div class="bc-foot"><span>Cisco</span><span>Jan 2025</span></div>
+    </article>
+  </div>
+</section>
+
+<section class="section wrap" id="gadgets">
+  <div class="section-head" data-num="04">
+    <span class="eyebrow">Case 04 · Gadgets</span>
+    <h2>A detective is only as good as his tools</h2>
+  </div>
+  <div class="st-grid">
+    <article class="st-card">
+      <header><h3>Network &amp; AD</h3><span class="st-icon">Primary</span></header>
+      <p>Active Directory attacks, enumeration and information gathering, attacking common services, lateral movement, pivoting, Windows and Linux privilege escalation, post-exploitation.</p>
+    </article>
+    <article class="st-card">
+      <header><h3>Web Applications</h3><span class="st-icon">Primary</span></header>
+      <p>XSS, SQL injection (including blind), command injection, file inclusion, file upload bypass, XXE, IDOR, authentication and authorization attacks, CMS attacks, web fuzzing, web proxies.</p>
+    </article>
+    <article class="st-card">
+      <header><h3>Methodology</h3><span class="st-icon">Deduction</span></header>
+      <p>Penetration testing, vulnerability assessment, source code review, technical reporting and remediation guidance.</p>
+    </article>
+    <article class="st-card">
+      <header><h3>Tools</h3><span class="st-icon">Gadgets</span></header>
+      <ul class="chips">
+        <li>Burp Suite</li><li>Nmap</li><li>BloodHound</li><li>NetExec</li><li>Impacket</li><li>Responder</li>
+        <li>Mimikatz</li><li>Ligolo-ng</li><li>Chisel</li><li>ffuf</li><li>sqlmap</li><li>Metasploit</li>
+      </ul>
+    </article>
+    <article class="st-card">
+      <header><h3>Development</h3><span class="st-icon">Cover identity</span></header>
+      <ul class="chips">
+        <li>C#</li><li>ASP.NET Core</li><li>EF Core</li><li>REST APIs</li><li>React</li><li>TypeScript</li><li>Git</li>
+      </ul>
+    </article>
+    <article class="st-card">
+      <header><h3>Languages</h3><span class="st-icon">Comms</span></header>
+      <p>Arabic — native · French — intermediate · English — intermediate.</p>
+    </article>
+  </div>
+</section>
+
+<section class="section wrap" id="timeline">
+  <div class="section-head" data-num="05">
+    <span class="eyebrow">Case 05 · Timeline</span>
+    <h2>Experience &amp; education</h2>
+  </div>
+  <ol class="timeline">
+    <li>
+      <div class="tl-when">Jan 2025 — Present</div>
+      <div class="tl-body">
+        <h3>Independent Security Researcher <span>Bug Bounty · Remote</span></h3>
+        <ul>
+          <li>Reported XSS (OpenAI, duplicate) and a CORS misconfiguration (Temu, informative) through public programs.</li>
+          <li>Recon, manual code review and business logic testing on large enterprise attack surfaces.</li>
+        </ul>
+      </div>
+    </li>
+    <li>
+      <div class="tl-when">Nov 2024 — Present</div>
+      <div class="tl-body">
+        <h3>Full-Stack Developer <span>Soins et Santé Groupe · Lyon, France (Remote)</span></h3>
+        <ul>
+          <li>Build and maintain the core logic in ASP.NET Core, including database schemas and the service layer.</li>
+          <li>Develop controllers and REST APIs that connect the React/TypeScript frontend to the backend.</li>
+          <li>Run data migrations and database optimizations with Entity Framework Core.</li>
+          <li>Own the responsive React/TypeScript frontend: state management and API integration.</li>
+        </ul>
+      </div>
+    </li>
+    <li>
+      <div class="tl-when">2020 — 2023</div>
+      <div class="tl-body">
+        <h3>B.Sc. Computer Science <span>Université Amar Telidji · Laghouat, Algeria</span></h3>
+      </div>
+    </li>
+  </ol>
+</section>
+
+<section class="section wrap" id="logs">
+  <div class="section-head row" data-num="06">
+    <div>
+      <span class="eyebrow">Case 06 · Case Files</span>
+      <h2>Latest from the blog</h2>
+    </div>
+    <a class="btn btn-ghost" href="/blog/">All case files →</a>
+  </div>
+  <div class="post-grid">
+    
+      
+
+<a class="post-card f-report" href="/blog/2026/10/ad-enumeration-checklist/">
+  <div class="pc-type">
+    <b>Field Report</b>
+    <span>Oct 22, 2026</span>
+  </div>
+  <h3>My Active Directory Enumeration Checklist</h3>
+  <p>Most Active Directory compromises are not about a fancy exploit. They are about one small mistake that enumeration shows you. This is the checklist...</p>
+  <div class="pc-foot">
+    <div class="pc-tags"><span>#active-directory</span><span>#enumeration</span><span>#notes</span></div>
+    <span class="pc-open">Open file →</span>
+  </div>
+</a>
+
+    
+      
+
+<a class="post-card f-dossier" href="/blog/2026/10/from-developer-to-pentester/">
+  <div class="pc-type">
+    <b>Dossier</b>
+    <span>Oct 20, 2026</span>
+  </div>
+  <h3>From Developer to Pentester: My Road to OSCP+ and CPTS</h3>
+  <p>I started as a full-stack developer. I write C# and ASP.NET Core on the backend and React with TypeScript on the frontend. In 2026 I passed HTB CPT...</p>
+  <div class="pc-foot">
+    <div class="pc-tags"><span>#career</span><span>#oscp</span><span>#cpts</span></div>
+    <span class="pc-open">Open file →</span>
+  </div>
+</a>
+
+    
+  </div>
+</section>
+
+<section class="section wrap" id="contact">
+  <div class="contact-box">
+    <div class="terminal mono" aria-hidden="true">
+      <p><span class="p">&gt;</span> open secure_channel --to 0xnu11ptr</p>
+      <p><span class="p">&gt;</span> handshake ........ <span class="ok">OK</span></p>
+      <p><span class="p">&gt;</span> encryption ....... <span class="ok">ON</span></p>
+      <p><span class="p">&gt;</span> awaiting new case<span class="caret">_</span></p>
+    </div>
+    <div class="contact-copy">
+      <span class="eyebrow">Case 07 · Contact</span>
+      <h2>Call the detective.</h2>
+      <p>Need a penetration test, a code review with an attacker's eye, or just want to talk security? The line is open.</p>
+      <div class="hero-cta">
+        <a class="btn btn-red" href="mailto:mekahalchamssedin@gmail.com">✉ mekahalchamssedin@gmail.com</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/mekahal-chamese-elddine-7270761bb" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn btn-ghost" href="https://github.com/0xnu11ptr" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </main>
+
+  <footer class="footer">
+    <p class="footer-truth">One truth prevails.</p>
+    <p>© 2026 Mekahal Chamese Elddine · <span class="mono">0xnu11ptr</span></p>
+  </footer>
+
+  <script src="/assets/js/main.js?v=1792956135" defer></script>
+</body>
+</html>

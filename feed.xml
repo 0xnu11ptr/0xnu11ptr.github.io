@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>0xnu11ptr</title>
+  <subtitle>Penetration Tester · OSCP+ · HTB CPTS — profile and blog of 0xnu11ptr.</subtitle>
+  <link href="https://0xnu11ptr.github.io/feed.xml" rel="self"/>
+  <link href="https://0xnu11ptr.github.io/"/>
+  <id>https://0xnu11ptr.github.io/</id>
+  <author><name>Mekahal Chamese Elddine</name></author>
+  <updated>2026-10-22T00:00:00.000Z</updated>
+  
+  <entry>
+    <title>My Active Directory Enumeration Checklist</title>
+    <link href="https://0xnu11ptr.github.io/blog/2026/10/ad-enumeration-checklist/"/>
+    <id>https://0xnu11ptr.github.io/blog/2026/10/ad-enumeration-checklist/</id>
+    <updated>2026-10-22T00:00:00.000Z</updated>
+    <summary>Most Active Directory compromises are not about a fancy exploit. They are about one small mistake that enumeration shows you. This is the checklist I follow at the start of every internal test or lab, once I have a first set of domain credentials.</summary>
+  </entry>
+  
+  <entry>
+    <title>From Developer to Pentester: My Road to OSCP+ and CPTS</title>
+    <link href="https://0xnu11ptr.github.io/blog/2026/10/from-developer-to-pentester/"/>
+    <id>https://0xnu11ptr.github.io/blog/2026/10/from-developer-to-pentester/</id>
+    <updated>2026-10-20T00:00:00.000Z</updated>
+    <summary>I started as a full-stack developer. I write C# and ASP.NET Core on the backend and React with TypeScript on the frontend. In 2026 I passed HTB CPTS in July and OSCP+ in September. This post is about how that road looked and what I learned.</summary>
+  </entry>
+  
+</feed>
